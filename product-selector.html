@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VAVR Product Selector | Configure Your Display</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <div class="top-bar">
+        <a class="logo" href="index.html">
+          <span>V</span>
+          <span>VAVR Display Systems</span>
+        </a>
+        <nav aria-label="Primary">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="product-selector.html">Product Selector</a></li>
+            <li><a href="industries.html">Industries</a></li>
+            <li><a href="custom-design-lab.html">Custom Lab</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <h1 class="section-title">Design your display</h1>
+        <p class="section-intro">
+          Answer a few quick questions to generate a tailored VAVR configuration, recommended
+          accessories, and next steps. Your responses route directly to our solution architects.
+        </p>
+
+        <div class="stepper">
+          <div class="step active" data-progress-step>1. Environment</div>
+          <div class="step" data-progress-step>2. Performance</div>
+          <div class="step" data-progress-step>3. Services</div>
+          <div class="step" data-progress-step>4. Summary</div>
+        </div>
+
+        <div class="grid" style="grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 2rem; align-items: start;">
+          <form id="selector-form" data-selector-form>
+            <div data-step>
+              <div class="form-row two-col">
+                <div>
+                  <label for="environment">Environment</label>
+                  <select id="environment" name="environment" required>
+                    <option value="">Select indoor or outdoor</option>
+                    <option>Indoor</option>
+                    <option>Outdoor</option>
+                    <option>Hybrid / Semi-Outdoor</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="industry">Primary industry</label>
+                  <select id="industry" name="primaryIndustry">
+                    <option value="">Select industry</option>
+                    <option>Retail &amp; Flagship Stores</option>
+                    <option>Events &amp; Live Production</option>
+                    <option>Gaming &amp; Esports</option>
+                    <option>Control Rooms &amp; Corporate</option>
+                    <option>Education &amp; Campuses</option>
+                    <option>Outdoor Advertising</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row two-col">
+                <div>
+                  <label for="category">Display category</label>
+                  <select id="category" name="displayCategory" required>
+                    <option value="">Select category</option>
+                    <option>All-in-One</option>
+                    <option>MicroLED Canvas</option>
+                    <option>Transparent AIO Poster</option>
+                    <option>Interactive Touchscreen</option>
+                    <option>Interactive LED Floor</option>
+                    <option>VAVR Rental Panels</option>
+                    <option>Retail Signage</option>
+                    <option>Videoflex® Motorised Display</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="dimensions">Target size or cabinet</label>
+                  <input
+                    id="dimensions"
+                    name="targetDimensions"
+                    type="text"
+                    placeholder="e.g. 500 × 1000 mm cabinets"
+                    data-sync="cabinetSize"
+                  />
+                </div>
+              </div>
+              <div class="form-row two-col">
+                <div>
+                  <label for="application">Application</label>
+                  <select id="application" name="application">
+                    <option value="">Select application</option>
+                    <option>Retail</option>
+                    <option>Education</option>
+                    <option>Events</option>
+                    <option>Control Rooms</option>
+                    <option>Corporate</option>
+                    <option>Showrooms</option>
+                    <option>Outdoor Advertising</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="mounting">Mounting preference</label>
+                  <select id="mounting" name="mountingPreference">
+                    <option value="">Select mounting</option>
+                    <option>Wall</option>
+                    <option>Hanging</option>
+                    <option>Freestanding</option>
+                    <option>Truss</option>
+                    <option>Mobile Stand</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <label for="use-case">Describe the experience</label>
+                <textarea
+                  id="use-case"
+                  name="experienceOverview"
+                  placeholder="Tell us about the content, audience, and space."
+                ></textarea>
+              </div>
+              <div class="hero-actions">
+                <button class="btn btn-primary" data-next>Next: Performance</button>
+              </div>
+            </div>
+
+            <div data-step hidden>
+              <div class="form-row two-col">
+                <div>
+                  <label for="pixel-pitch">Preferred pixel pitch</label>
+                  <select id="pixel-pitch" name="pixelPitch">
+                    <option value="">Use our recommendation</option>
+                    <option>P1.2</option>
+                    <option>P1.5</option>
+                    <option>P1.9</option>
+                    <option>P2.6</option>
+                    <option>P2.9</option>
+                    <option>P3.9</option>
+                    <option>P4.8</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="brightness">Brightness requirements (nits)</label>
+                  <input id="brightness" name="brightness" type="number" min="400" step="50" placeholder="e.g. 1200" />
+                </div>
+              </div>
+              <div class="form-row two-col">
+                <div>
+                  <label for="content-sources">Content sources</label>
+                  <select id="content-sources" name="contentSources">
+                    <option value="">Select sources</option>
+                    <option>Media Player</option>
+                    <option>HDMI / BYOD</option>
+                    <option>Interactive Touch PC</option>
+                    <option>Broadcast / SDI</option>
+                    <option>Real-time Engine (XR)</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="integration">Integrations</label>
+                  <input id="integration" name="integrations" type="text" placeholder="CMS, automation, sensors" />
+                </div>
+              </div>
+              <div class="form-row">
+                <label for="budget">Estimated budget (USD)</label>
+                <input id="budget" name="budget" type="text" placeholder="e.g. $25,000" />
+              </div>
+              <div class="hero-actions">
+                <button class="btn btn-secondary" data-prev>Back</button>
+                <button class="btn btn-primary" data-next>Next: Services</button>
+              </div>
+            </div>
+
+            <div data-step hidden>
+              <div class="form-row two-col">
+                <div>
+                  <label for="timeline">Target installation date</label>
+                  <input id="timeline" name="installationTimeline" type="date" />
+                </div>
+                <div>
+                  <label for="location">Installation location</label>
+                  <input id="location" name="installationLocation" type="text" placeholder="City, Country" />
+                </div>
+              </div>
+              <div class="form-row two-col">
+                <div>
+                  <label for="services">Support requirements</label>
+                  <select id="services" name="supportRequirements">
+                    <option value="">Select service</option>
+                    <option>Installation &amp; Training</option>
+                    <option>RMA / Repair Program</option>
+                    <option>Rework / Refresh Consultation</option>
+                    <option>All of the above</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="attachments">Need CAD or floorplan review?</label>
+                  <select id="attachments" name="needsCadOrFloorplan">
+                    <option value="">Select an option</option>
+                    <option>Yes, I will upload assets</option>
+                    <option>I need VAVR to create CAD</option>
+                    <option>No additional support</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <label for="contact-name">Contact name</label>
+                <input id="contact-name" name="contactName" type="text" placeholder="Full name" required />
+              </div>
+              <div class="form-row two-col">
+                <div>
+                  <label for="contact-email">Email</label>
+                  <input id="contact-email" name="contactEmail" type="email" placeholder="you@company.com" required />
+                </div>
+                <div>
+                  <label for="contact-phone">Phone</label>
+                  <input id="contact-phone" name="contactPhone" type="tel" placeholder="+1 555 123 4567" />
+                </div>
+              </div>
+              <div class="hero-actions">
+                <button class="btn btn-secondary" data-prev>Back</button>
+                <button class="btn btn-primary" data-next>Review Summary</button>
+              </div>
+            </div>
+
+            <div data-step hidden>
+              <div class="highlight" data-summary>
+                <p>Provide your project details to generate a tailored configuration preview.</p>
+              </div>
+              <p>
+                Our specialists will confirm cabinet counts, pixel pitch, and accessory recommendations
+                before sharing spec sheets and pricing.
+              </p>
+              <div class="hero-actions">
+                <button class="btn btn-secondary" data-prev>Back</button>
+                <button class="btn btn-primary" type="submit">Submit Request</button>
+              </div>
+            </div>
+          </form>
+
+          <aside class="card" aria-label="Product selector insights">
+            <h3>What to expect</h3>
+            <ul class="feature-list">
+              <li>Receive curated spec sheets and CAD references</li>
+              <li>Pixel pitch &amp; brightness aligned to your environment</li>
+              <li>Installation, RMA, and training options mapped to timeline</li>
+            </ul>
+            <blockquote>
+              “The wizard made it simple to configure Videoflex® for our touring schedule and secure
+              installation support in one request.”
+            </blockquote>
+            <p class="highlight">Need a human touch? <a href="contact.html">Book a discovery call</a>.</p>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div>
+          <div class="logo"><span>V</span><span>VAVR Display Systems</span></div>
+          <p class="tagline">Design. Deploy. Rework. Repair. Refresh.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="industries.html">Industries Served</a></li>
+            <li><a href="custom-design-lab.html">Custom Design Lab</a></li>
+            <li><a href="resources.html">Resource Library</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Engage</h4>
+          <ul>
+            <li><a href="product-selector.html">Design Your Display</a></li>
+            <li><a href="contact.html">Request a Quote</a></li>
+            <li><a href="contact.html#service">Book Installation or Repair</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <div class="sticky-cta">
+      <a class="btn btn-primary" data-target="#selector-form">Resume Configuration</a>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/product-selector.js"></script>
+  </body>
+</html>
