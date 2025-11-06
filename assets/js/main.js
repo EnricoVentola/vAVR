@@ -5,6 +5,34 @@ navLinks.forEach((link) => {
   }
 });
 
+const navToggle = document.querySelector('.nav-toggle');
+const primaryNav = document.querySelector('#primary-nav');
+
+if (navToggle && primaryNav) {
+  const closeNav = () => {
+    navToggle.setAttribute('aria-expanded', 'false');
+    primaryNav.classList.remove('is-open');
+  };
+
+  navToggle.addEventListener('click', () => {
+    const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+    navToggle.setAttribute('aria-expanded', String(!expanded));
+    primaryNav.classList.toggle('is-open', !expanded);
+  });
+
+  primaryNav.addEventListener('click', (event) => {
+    if (event.target.closest('a')) {
+      closeNav();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      closeNav();
+    }
+  });
+}
+
 const stickyCta = document.querySelector('.sticky-cta');
 if (stickyCta) {
   stickyCta.addEventListener('click', (event) => {
@@ -137,3 +165,64 @@ if (sizeTool) {
     updateSize(activeButton.dataset.size);
   }
 }
+
+const whatsappForms = document.querySelectorAll('form[data-whatsapp-number]');
+whatsappForms.forEach((form) => {
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const number = form.getAttribute('data-whatsapp-number');
+    if (!number) return;
+
+    const intro = form.getAttribute('data-whatsapp-intro');
+    const lines = [];
+    if (intro) {
+      lines.push(intro);
+    }
+
+    const fields = Array.from(form.querySelectorAll('input, select, textarea'));
+    fields.forEach((field) => {
+      if (!field.name) return;
+      if ((field.type === 'checkbox' || field.type === 'radio') && !field.checked) return;
+
+      const value = field.value?.trim();
+      if (!value) return;
+
+      let labelText = '';
+      if (field.id) {
+        const escapedId = typeof CSS !== 'undefined' && CSS.escape ? CSS.escape(field.id) : field.id;
+        const label = form.querySelector(`label[for="${escapedId}"]`);
+        if (label) {
+          labelText = label.textContent.trim();
+        }
+      }
+
+      if (!labelText && field.placeholder) {
+        labelText = field.placeholder;
+      }
+
+      if (!labelText && field.name) {
+        const normalised = field.name
+          .replace(/([A-Z])/g, ' $1')
+          .replace(/[_-]/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+        if (normalised) {
+          labelText = normalised.charAt(0).toUpperCase() + normalised.slice(1);
+        }
+      }
+
+      if (!labelText) {
+        labelText = 'Detail';
+      }
+
+      lines.push(`${labelText}: ${value}`);
+    });
+
+    if (lines.length === 0) {
+      lines.push('Hello VAVR team, I would like to discuss display solutions.');
+    }
+
+    const url = `https://wa.me/${number}?text=${encodeURIComponent(lines.join('\n'))}`;
+    window.open(url, '_blank', 'noopener');
+  });
+});

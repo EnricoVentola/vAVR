@@ -13,7 +13,13 @@
           <span>V</span>
           <span>VAVR Display Systems</span>
         </a>
-        <nav aria-label="Primary">
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+        </button>
+        <nav id="primary-nav" aria-label="Primary">
           <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="product-selector.html">Product Selector</a></li>
@@ -31,14 +37,20 @@
       <section>
         <h1 class="section-title">Let's build your next display</h1>
         <p class="section-intro">
-          Request a quote, book a demo, or schedule installation and repair services. Our team responds
-          within one business day.
+          Request a quote, book a demo, or schedule installation and repair services. Share the essentials
+          below and we will launch a WhatsApp Business chat so you can continue the conversation instantly.
         </p>
       </section>
 
       <section>
         <div class="grid" style="grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 2rem; align-items: start;">
-          <form class="card" id="quote" aria-labelledby="quote-title">
+          <form
+            class="card"
+            id="quote"
+            aria-labelledby="quote-title"
+            data-whatsapp-number="18005550100"
+            data-whatsapp-intro="Quote &amp; demo request"
+          >
             <h2 id="quote-title">Quote &amp; demo request</h2>
             <div class="form-row two-col">
               <div>
@@ -103,14 +115,19 @@
                 <input id="demo-date" name="demoDate" type="date" />
               </div>
             </div>
+            <p class="form-note">Submitting opens a WhatsApp Business chat with the VAVR specialist team.</p>
             <div class="hero-actions">
-              <button class="btn btn-primary" type="submit">Submit request</button>
+              <button class="btn btn-primary" type="submit">Start WhatsApp chat</button>
             </div>
           </form>
 
           <aside class="card">
             <h2>Talk to a specialist</h2>
-            <p>Call +1 800 555 0100 or email <a href="mailto:hello@vavrdisplays.com">hello@vavrdisplays.com</a></p>
+            <p>
+              Prefer a direct line? Message us on WhatsApp at
+              <a href="https://wa.me/18005550100" target="_blank" rel="noopener">+1 800 555 0100</a> or call the
+              same number.
+            </p>
             <div class="highlight">
               <strong>Need to upload spec sheets later?</strong>
               <p>We will share a secure portal link for assets, CAD drawings, and approvals.</p>
@@ -126,7 +143,12 @@
       <section id="service">
         <h2 class="section-title">Installation, repair &amp; rework</h2>
         <div class="grid" style="grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 2rem; align-items: start;">
-          <form class="card" aria-labelledby="service-title">
+          <form
+            class="card"
+            aria-labelledby="service-title"
+            data-whatsapp-number="18005550100"
+            data-whatsapp-intro="Service request"
+          >
             <h3 id="service-title">Service request</h3>
             <div class="form-row two-col">
               <div>
@@ -168,8 +190,9 @@
                 <textarea id="service-notes" name="additionalNotes" placeholder="Attachments, access instructions"></textarea>
               </div>
             </div>
+            <p class="form-note">We will open WhatsApp so you can confirm photos, files, and scheduling with our team.</p>
             <div class="hero-actions">
-              <button class="btn btn-primary" type="submit">Send request</button>
+              <button class="btn btn-primary" type="submit">Start WhatsApp chat</button>
             </div>
           </form>
 
