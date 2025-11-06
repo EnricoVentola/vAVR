@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact &amp; Quote Request | VAVR Display Systems</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <div class="top-bar">
+        <a class="logo" href="index.html">
+          <span>V</span>
+          <span>VAVR Display Systems</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+        </button>
+        <nav id="primary-nav" aria-label="Primary">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="product-selector.html">Product Selector</a></li>
+            <li><a href="industries.html">Industries</a></li>
+            <li><a href="custom-design-lab.html">Custom Lab</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <h1 class="section-title">Let's build your next display</h1>
+        <p class="section-intro">
+          Request a quote, book a demo, or schedule installation and repair services. Share the essentials
+          below and we will launch a WhatsApp Business chat so you can continue the conversation instantly.
+        </p>
+      </section>
+
+      <section>
+        <div class="grid" style="grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 2rem; align-items: start;">
+          <form
+            class="card"
+            id="quote"
+            aria-labelledby="quote-title"
+            data-whatsapp-number="18005550100"
+            data-whatsapp-intro="Quote &amp; demo request"
+          >
+            <h2 id="quote-title">Quote &amp; demo request</h2>
+            <div class="form-row two-col">
+              <div>
+                <label for="quote-name">Name</label>
+                <input id="quote-name" name="name" type="text" required />
+              </div>
+              <div>
+                <label for="quote-company">Company</label>
+                <input id="quote-company" name="company" type="text" />
+              </div>
+            </div>
+            <div class="form-row two-col">
+              <div>
+                <label for="quote-email">Email</label>
+                <input id="quote-email" name="email" type="email" required />
+              </div>
+              <div>
+                <label for="quote-phone">Phone</label>
+                <input id="quote-phone" name="phone" type="tel" placeholder="+1 555 123 4567" />
+              </div>
+            </div>
+            <div class="form-row two-col">
+              <div>
+                <label for="quote-type">Display interest</label>
+                <select id="quote-type" name="displayInterest" required>
+                  <option value="">Select a display</option>
+                  <option>All-in-One</option>
+                  <option>MicroLED Canvas</option>
+                  <option>Transparent AIO Poster</option>
+                  <option>Interactive Floor</option>
+                  <option>VAVR Rental Panels</option>
+                  <option>Videoflex®</option>
+                </select>
+              </div>
+              <div>
+                <label for="quote-budget">Budget</label>
+                <select id="quote-budget" name="budget">
+                  <option value="">Select a range</option>
+                  <option>$15k – $25k</option>
+                  <option>$25k – $50k</option>
+                  <option>$50k – $100k</option>
+                  <option>$100k+</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <label for="quote-message">Project details</label>
+              <textarea id="quote-message" name="message" placeholder="Tell us about timelines, goals, and location."></textarea>
+            </div>
+            <div class="form-row two-col">
+              <div>
+                <label for="demo">Book a demo</label>
+                <select id="demo" name="demoPreference">
+                  <option value="">Select a demo format</option>
+                  <option>Virtual demo</option>
+                  <option>Visit VAVR HQ</option>
+                  <option>Onsite demo</option>
+                </select>
+              </div>
+              <div>
+                <label for="demo-date">Preferred date</label>
+                <input id="demo-date" name="demoDate" type="date" />
+              </div>
+            </div>
+            <p class="form-note">Submitting opens a WhatsApp Business chat with the VAVR specialist team.</p>
+            <div class="hero-actions">
+              <button class="btn btn-primary" type="submit">Start WhatsApp chat</button>
+            </div>
+          </form>
+
+          <aside class="card">
+            <h2>Talk to a specialist</h2>
+            <p>
+              Prefer a direct line? Message us on WhatsApp at
+              <a href="https://wa.me/18005550100" target="_blank" rel="noopener">+1 800 555 0100</a> or call the
+              same number.
+            </p>
+            <div class="highlight">
+              <strong>Need to upload spec sheets later?</strong>
+              <p>We will share a secure portal link for assets, CAD drawings, and approvals.</p>
+            </div>
+            <p>
+              Looking for onboarding resources? Visit the <a href="resources.html">resource library</a> or
+              <a href="product-selector.html">design your display</a> first.
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <section id="service">
+        <h2 class="section-title">Installation, repair &amp; rework</h2>
+        <div class="grid" style="grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 2rem; align-items: start;">
+          <form
+            class="card"
+            aria-labelledby="service-title"
+            data-whatsapp-number="18005550100"
+            data-whatsapp-intro="Service request"
+          >
+            <h3 id="service-title">Service request</h3>
+            <div class="form-row two-col">
+              <div>
+                <label for="serial">Product serial number</label>
+                <input id="serial" name="serialNumber" type="text" placeholder="USVA-RETAIL-2400-001" required />
+              </div>
+              <div>
+                <label for="request-type">Request type</label>
+                <select id="request-type" name="requestType" required>
+                  <option value="">Select request</option>
+                  <option>Installation</option>
+                  <option>Return</option>
+                  <option>Repair</option>
+                  <option>Rework</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <label for="issue">Issue description</label>
+              <textarea id="issue" name="issueDescription" placeholder="Summary of issue or request." required></textarea>
+            </div>
+            <div class="form-row two-col">
+              <div>
+                <label for="service-location">Location</label>
+                <input id="service-location" name="location" type="text" placeholder="Site address" required />
+              </div>
+              <div>
+                <label for="contact-person">Contact person</label>
+                <input id="contact-person" name="contactPerson" type="text" placeholder="Name &amp; phone/email" required />
+              </div>
+            </div>
+            <div class="form-row two-col">
+              <div>
+                <label for="service-date">Preferred date</label>
+                <input id="service-date" name="preferredDate" type="date" />
+              </div>
+              <div>
+                <label for="service-notes">Additional notes</label>
+                <textarea id="service-notes" name="additionalNotes" placeholder="Attachments, access instructions"></textarea>
+              </div>
+            </div>
+            <p class="form-note">We will open WhatsApp so you can confirm photos, files, and scheduling with our team.</p>
+            <div class="hero-actions">
+              <button class="btn btn-primary" type="submit">Start WhatsApp chat</button>
+            </div>
+          </form>
+
+          <aside class="card">
+            <h3>Packaging reminder</h3>
+            <p>
+              Please book an RMA slot before shipping any items. Use 360° foam, bubble wrap, and strong
+              cartons sealed with plastic shrink wrap.
+            </p>
+            <p>
+              Access the customer portal for scheduling, training videos, and service history once your
+              request has been logged.
+            </p>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div>
+          <div class="logo"><span>V</span><span>VAVR Display Systems</span></div>
+          <p class="tagline">Design. Deploy. Rework. Repair. Refresh.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="industries.html">Industries Served</a></li>
+            <li><a href="custom-design-lab.html">Custom Design Lab</a></li>
+            <li><a href="resources.html">Resource Library</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Engage</h4>
+          <ul>
+            <li><a href="product-selector.html">Design Your Display</a></li>
+            <li><a href="contact.html">Request a Quote</a></li>
+            <li><a href="contact.html#service">Book Installation or Repair</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <div class="sticky-cta">
+      <a class="btn btn-primary" data-target="#quote">Request a Quote</a>
+    </div>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

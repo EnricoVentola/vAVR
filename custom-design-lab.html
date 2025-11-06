@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Custom Design Lab | VAVR Display Systems</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <div class="top-bar">
+        <a class="logo" href="index.html">
+          <span>V</span>
+          <span>VAVR Display Systems</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+        </button>
+        <nav id="primary-nav" aria-label="Primary">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="product-selector.html">Product Selector</a></li>
+            <li><a href="industries.html">Industries</a></li>
+            <li><a href="custom-design-lab.html">Custom Lab</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <h1 class="section-title">Custom Design Lab</h1>
+        <p class="section-intro">
+          Collaborate with VAVR engineers to transform your floorplans and creative briefs into
+          deployable LED ecosystems. Upload drawings, specify budgets, and receive CAD-ready
+          schematics within days.
+        </p>
+      </section>
+
+      <section>
+        <div class="grid" style="grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 2rem; align-items: start;">
+          <form class="card" id="design-request" data-accordion>
+            <h2>Submit a design brief</h2>
+            <div class="form-row two-col">
+              <div>
+                <label for="project-name">Project name</label>
+                <input id="project-name" name="projectName" type="text" placeholder="Project or venue" required />
+              </div>
+              <div>
+                <label for="project-type">Display type</label>
+                <select id="project-type" name="displayType" required>
+                  <option value="">Select type</option>
+                  <option>MicroLED Canvas</option>
+                  <option>Transparent Poster</option>
+                  <option>Interactive Floor</option>
+                  <option>Rental Stage Package</option>
+                  <option>Custom Videoflex®</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row two-col">
+              <div>
+                <label for="dimensions">Target dimensions</label>
+                <input id="dimensions" name="targetDimensions" type="text" placeholder="Width × Height" />
+              </div>
+              <div>
+                <label for="cabinet-size">Preferred cabinet size</label>
+                <input id="cabinet-size" name="cabinetSize" type="text" placeholder="e.g. 500 × 500 mm" />
+              </div>
+            </div>
+            <div class="form-row">
+              <label for="floorplan">Upload floorplan or CAD (URL)</label>
+              <input id="floorplan" name="floorplanUrl" type="url" placeholder="https://drive.com/floorplan" />
+            </div>
+            <div class="form-row two-col">
+              <div>
+                <label for="budget-range">Budget range</label>
+                <select id="budget-range" name="budgetRange">
+                  <option value="">Select range</option>
+                  <option>$15k – $25k</option>
+                  <option>$25k – $50k</option>
+                  <option>$50k – $100k</option>
+                  <option>$100k+</option>
+                </select>
+              </div>
+              <div>
+                <label for="timeline">Target go-live</label>
+                <input id="timeline" name="goLive" type="date" />
+              </div>
+            </div>
+            <div class="form-row">
+              <label for="experience">Experience goals</label>
+              <textarea id="experience" name="experienceGoals" placeholder="Immersive tunnel, control dashboard, etc."></textarea>
+            </div>
+            <div class="form-row two-col">
+              <div>
+                <label for="contact-name">Contact name</label>
+                <input id="contact-name" name="contactName" type="text" required />
+              </div>
+              <div>
+                <label for="contact-email">Email</label>
+                <input id="contact-email" name="contactEmail" type="email" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <label for="contact-phone">Phone</label>
+              <input id="contact-phone" name="contactPhone" type="tel" placeholder="+44 20 0000 0000" />
+            </div>
+            <div class="hero-actions">
+              <button class="btn btn-primary" type="submit">Send design brief</button>
+            </div>
+          </form>
+
+          <aside class="card">
+            <h2>What happens next?</h2>
+            <ol class="feature-list" style="list-style: none; counter-reset: step;">
+              <li>
+                <strong>Discovery call</strong><br />
+                A VAVR design specialist reviews requirements, site conditions, and timelines.
+              </li>
+              <li>
+                <strong>Concept package</strong><br />
+                Receive layout options, cabinet counts, and render references.
+              </li>
+              <li>
+                <strong>Engineering handoff</strong><br />
+                Final CAD, power, and structural documents delivered via the customer portal.
+              </li>
+            </ol>
+            <div class="highlight">
+              <strong>Need instant inspiration?</strong>
+              <p>
+                Browse pre-made design templates with cabinet counts and accessories ready to order.
+              </p>
+              <a class="btn btn-secondary" href="resources.html">View template library</a>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title">Tools for architects &amp; integrators</h2>
+        <div class="grid grid-3">
+          <article class="card">
+            <h3>Pixel pitch visualiser</h3>
+            <p>
+              Compare resolutions and ideal viewing distances to pick the optimal cabinet density for
+              retail, control, or live event environments.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Size comparison tool</h3>
+            <p>
+              Overlay LED canvases against standard doorway and truck dimensions to plan logistics.
+            </p>
+          </article>
+          <article class="card">
+            <h3>ROI calculators</h3>
+            <p>
+              Model advertising uplift, ticketing revenue, or dwell time improvements by industry.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div>
+          <div class="logo"><span>V</span><span>VAVR Display Systems</span></div>
+          <p class="tagline">Design. Deploy. Rework. Repair. Refresh.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="industries.html">Industries Served</a></li>
+            <li><a href="custom-design-lab.html">Custom Design Lab</a></li>
+            <li><a href="resources.html">Resource Library</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Engage</h4>
+          <ul>
+            <li><a href="product-selector.html">Design Your Display</a></li>
+            <li><a href="contact.html">Request a Quote</a></li>
+            <li><a href="contact.html#service">Book Installation or Repair</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <div class="sticky-cta">
+      <a class="btn btn-primary" href="#design-request">Start Your Brief</a>
+    </div>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
