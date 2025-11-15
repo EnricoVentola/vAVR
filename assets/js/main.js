@@ -36,7 +36,7 @@ if (navToggle && primaryNav) {
 const heroCarousels = document.querySelectorAll('[data-hero-carousel]');
 heroCarousels.forEach((carousel) => {
   const track = carousel.querySelector('[data-hero-track]');
-  const slides = Array.from(track?.children || []);
+  const slides = track ? Array.from(track.children) : [];
   if (!track || slides.length <= 1) return;
 
   const prev = carousel.querySelector('[data-hero-prev]');
@@ -100,15 +100,19 @@ heroCarousels.forEach((carousel) => {
     }, autoplayDelay);
   };
 
-  prev?.addEventListener('click', () => {
-    setSlide(activeIndex - 1);
-    restartAutoplay();
-  });
+  if (prev) {
+    prev.addEventListener('click', () => {
+      setSlide(activeIndex - 1);
+      restartAutoplay();
+    });
+  }
 
-  next?.addEventListener('click', () => {
-    setSlide(activeIndex + 1);
-    restartAutoplay();
-  });
+  if (next) {
+    next.addEventListener('click', () => {
+      setSlide(activeIndex + 1);
+      restartAutoplay();
+    });
+  }
 
   carousel.addEventListener('mouseenter', stopAutoplay);
   carousel.addEventListener('mouseleave', restartAutoplay);
@@ -183,11 +187,11 @@ if (pixelVisualiser) {
     if (usage) usage.textContent = preset.use;
   };
 
-  slider?.addEventListener('input', () => {
-    updateVisualiser(Number(slider.value));
-  });
-
   if (slider) {
+    slider.addEventListener('input', () => {
+      updateVisualiser(Number(slider.value));
+    });
+
     updateVisualiser(Number(slider.value));
   }
 }
@@ -269,7 +273,7 @@ whatsappForms.forEach((form) => {
       if (!field.name) return;
       if ((field.type === 'checkbox' || field.type === 'radio') && !field.checked) return;
 
-      const value = field.value?.trim();
+      const value = typeof field.value === 'string' ? field.value.trim() : '';
       if (!value) return;
 
       let labelText = '';
@@ -320,9 +324,13 @@ if (heroCarousel) {
     let index = 0;
 
     const setActive = (nextIndex) => {
-      slides[index]?.classList.remove('is-active');
+      if (slides[index]) {
+        slides[index].classList.remove('is-active');
+      }
       index = nextIndex;
-      slides[index]?.classList.add('is-active');
+      if (slides[index]) {
+        slides[index].classList.add('is-active');
+      }
     };
 
     slides[0].classList.add('is-active');

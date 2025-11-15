@@ -6,6 +6,13 @@
   --color-light: #f4f6f8;
   --max-width: 1200px;
   --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --spec-color-drawing: #16a34a;
+  --spec-color-image: #7c3aed;
+  --spec-color-spec: #0ea5e9;
+  --spec-color-video: #2563eb;
+  --spec-color-guide: #f97316;
+  --spec-color-cad: #334155;
+  --spec-color-calculator: #0d9488;
 }
 
 * {
@@ -1042,47 +1049,154 @@ blockquote {
 }
 
 .spec-link:hover,
-.spec-link:focus-visible {
+.spec-link:focus-visible,
+.spec-dropdown-item:hover,
+.spec-dropdown-item:focus-visible {
   transform: translateY(-1px);
 }
 
-.spec-link[data-spec-type] {
+.spec-link[data-spec-type],
+.spec-dropdown-item[data-spec-type] {
   border: none;
   color: #ffffff;
   box-shadow: 0 12px 24px rgba(9, 19, 26, 0.18);
 }
 
-.spec-link[data-spec-type='drawing'] {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+.spec-link[data-spec-type='drawing'],
+.spec-dropdown-item[data-spec-type='drawing'] {
+  background: var(--spec-color-drawing);
 }
 
-.spec-link[data-spec-type='image'] {
-  background: var(--color-secondary);
+.spec-link[data-spec-type='image'],
+.spec-dropdown-item[data-spec-type='image'] {
+  background: var(--spec-color-image);
 }
 
-.spec-link[data-spec-type='spec'] {
-  background: var(--color-primary);
+.spec-link[data-spec-type='spec'],
+.spec-dropdown-item[data-spec-type='spec'] {
+  background: var(--spec-color-spec);
 }
 
-.spec-link[data-spec-type='video'] {
-  background: #0f3f6a;
+.spec-link[data-spec-type='video'],
+.spec-dropdown-item[data-spec-type='video'] {
+  background: var(--spec-color-video);
 }
 
-.spec-link[data-spec-type='guide'] {
-  background: #0b8a62;
+.spec-link[data-spec-type='guide'],
+.spec-dropdown-item[data-spec-type='guide'] {
+  background: var(--spec-color-guide);
 }
 
-.spec-link[data-spec-type='cad'] {
-  background: #143046;
+.spec-link[data-spec-type='cad'],
+.spec-dropdown-item[data-spec-type='cad'] {
+  background: var(--spec-color-cad);
 }
 
-.spec-link[data-spec-type='calculator'] {
-  background: #0c6f4d;
+.spec-link[data-spec-type='calculator'],
+.spec-dropdown-item[data-spec-type='calculator'] {
+  background: var(--spec-color-calculator);
 }
 
 .spec-link[data-spec-type]:hover,
-.spec-link[data-spec-type]:focus-visible {
+.spec-link[data-spec-type]:focus-visible,
+.spec-dropdown-item[data-spec-type]:hover,
+.spec-dropdown-item[data-spec-type]:focus-visible {
   box-shadow: 0 18px 32px rgba(9, 19, 26, 0.24);
+}
+
+.spec-dropdown {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 220px;
+}
+
+.spec-dropdown > summary {
+  list-style: none;
+}
+
+.spec-dropdown > summary::-webkit-details-marker {
+  display: none;
+}
+
+.spec-dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(13, 31, 45, 0.18);
+  background: #ffffff;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--color-dark);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.spec-dropdown-toggle::after {
+  content: '\25BE';
+  font-size: 0.7rem;
+  line-height: 1;
+  color: rgba(9, 19, 26, 0.6);
+  transition: transform 0.2s ease;
+}
+
+.spec-dropdown[open] > .spec-dropdown-toggle {
+  border-color: rgba(10, 126, 81, 0.35);
+  box-shadow: 0 12px 24px rgba(13, 31, 45, 0.15);
+}
+
+.spec-dropdown[open] > .spec-dropdown-toggle::after {
+  transform: rotate(180deg);
+}
+
+.spec-dropdown-toggle:hover,
+.spec-dropdown-toggle:focus-visible {
+  box-shadow: 0 12px 24px rgba(13, 31, 45, 0.18);
+  border-color: rgba(20, 199, 136, 0.45);
+}
+
+.spec-dropdown-toggle:focus-visible {
+  outline: 3px solid rgba(20, 199, 136, 0.35);
+  outline-offset: 2px;
+}
+
+.spec-dropdown-menu {
+  margin-top: 0.8rem;
+  padding: 0.85rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 22px 38px rgba(9, 19, 26, 0.22);
+  border: 1px solid rgba(13, 31, 45, 0.1);
+  display: grid;
+  gap: 0.6rem;
+  min-width: min(360px, 100%);
+  z-index: 10;
+}
+
+.spec-dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (max-width: 640px) {
+  .spec-dropdown {
+    width: 100%;
+  }
+
+  .spec-dropdown-menu {
+    min-width: 100%;
+  }
 }
 
 .summary-empty {
