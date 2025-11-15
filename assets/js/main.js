@@ -48,10 +48,10 @@ heroCarousels.forEach((carousel) => {
 
   const updateSlides = () => {
     slides.forEach((slide, index) => {
-      slide.setAttribute('data-active', index === activeIndex ? 'true' : 'false');
-      slide.setAttribute('aria-hidden', index === activeIndex ? 'false' : 'true');
+      const isActive = index === activeIndex;
+      slide.setAttribute('data-active', isActive ? 'true' : 'false');
+      slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
     });
-    track.style.transform = `translateX(-${activeIndex * 100}%)`;
   };
 
   let dots = [];
