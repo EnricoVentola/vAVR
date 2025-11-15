@@ -485,17 +485,25 @@ function recommendProducts(formData) {
         matches.push(`Optimised for ${environment.toLowerCase()} deployments`);
       }
 
-      if (industry && product.industries?.includes(industry)) {
+      if (industry && product.industries && product.industries.includes(industry)) {
         score += 2;
         matches.push(`Proven in ${industry}`);
       }
 
-      if (application && product.applications?.some((value) => normaliseValue(value) === normaliseValue(application))) {
+      if (
+        application &&
+        product.applications &&
+        product.applications.some((value) => normaliseValue(value) === normaliseValue(application))
+      ) {
         score += 2;
         matches.push(`Supports ${application.toLowerCase()} experiences`);
       }
 
-      if (mounting && product.mounting?.some((value) => normaliseValue(value) === normaliseValue(mounting))) {
+      if (
+        mounting &&
+        product.mounting &&
+        product.mounting.some((value) => normaliseValue(value) === normaliseValue(mounting))
+      ) {
         score += 1;
         matches.push(`${mounting} mounting ready`);
       }
@@ -540,7 +548,7 @@ function renderRecommendations(recommendations) {
       ${recommendations
         .map(({ product, matches }) => {
           const metaItems = [];
-          if (product.pixelPitch?.length) {
+          if (product.pixelPitch && product.pixelPitch.length) {
             metaItems.push(`<li><strong>Pixel pitch:</strong> ${product.pixelPitch.join(', ')}</li>`);
           }
           if (product.sizeSummary) {
@@ -551,7 +559,7 @@ function renderRecommendations(recommendations) {
               `<li><strong>Brightness:</strong> ${product.brightness.min}–${product.brightness.max} nits</li>`
             );
           }
-          if (product.mounting?.length) {
+          if (product.mounting && product.mounting.length) {
             metaItems.push(`<li><strong>Mounting:</strong> ${product.mounting.join(', ')}</li>`);
           }
 
@@ -683,34 +691,36 @@ if (form) {
     });
     buildSummary(new FormData(form));
   }
-}
 
-form?.addEventListener('input', (event) => {
-  if (event.target.matches('[data-sync]')) {
-    const { dataset, value } = event.target;
-    const target = form.querySelector(`[name="${dataset.sync}"]`);
-    if (target) {
-      target.value = value;
+  form.addEventListener('input', (event) => {
+    if (event.target.matches('[data-sync]')) {
+      const { dataset, value } = event.target;
+      const target = form.querySelector(`[name="${dataset.sync}"]`);
+      if (target) {
+        target.value = value;
+      }
     }
-  }
-  buildSummary(new FormData(form));
-});
+    buildSummary(new FormData(form));
+  });
 
-form?.addEventListener('submit', (event) => {
-  event.preventDefault();
-  buildSummary(new FormData(form));
-  showStep(steps.length - 1);
-});
-
-form?.addEventListener('click', (event) => {
-  if (event.target.closest('[data-next]')) {
+  form.addEventListener('submit', (event) => {
     event.preventDefault();
-    goToNextStep();
-  }
-  if (event.target.closest('[data-prev]')) {
-    event.preventDefault();
-    goToPreviousStep();
-  }
-});
+    buildSummary(new FormData(form));
+    showStep(steps.length - 1);
+  });
 
-buildSummary(form ? new FormData(form) : new FormData());
+  form.addEventListener('click', (event) => {
+    if (event.target.closest('[data-next]')) {
+      event.preventDefault();
+      goToNextStep();
+    }
+    if (event.target.closest('[data-prev]')) {
+      event.preventDefault();
+      goToPreviousStep();
+    }
+  });
+
+  buildSummary(new FormData(form));
+} else {
+  buildSummary(new FormData());
+}
