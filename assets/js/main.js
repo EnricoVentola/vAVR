@@ -226,3 +226,25 @@ whatsappForms.forEach((form) => {
     window.open(url, '_blank', 'noopener');
   });
 });
+
+
+const heroCarousel = document.querySelector('[data-hero-carousel]');
+if (heroCarousel) {
+  const slides = Array.from(heroCarousel.querySelectorAll('.hero-slide'));
+  if (slides.length > 0) {
+    let index = 0;
+
+    const setActive = (nextIndex) => {
+      slides[index]?.classList.remove('is-active');
+      index = nextIndex;
+      slides[index]?.classList.add('is-active');
+    };
+
+    slides[0].classList.add('is-active');
+
+    setInterval(() => {
+      const next = (index + 1) % slides.length;
+      setActive(next);
+    }, 6000);
+  }
+}
