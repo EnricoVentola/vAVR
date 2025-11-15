@@ -228,90 +228,23 @@ whatsappForms.forEach((form) => {
 });
 
 
-const galleries = document.querySelectorAll('[data-gallery]');
-galleries.forEach((gallery) => {
-  const track = gallery.querySelector('[data-gallery-track]');
-  const slides = track ? Array.from(track.children) : [];
-  const prev = gallery.querySelector('[data-gallery-prev]');
-  const next = gallery.querySelector('[data-gallery-next]');
-  if (!track || slides.length === 0) {
-    prev?.setAttribute('hidden', '');
-    next?.setAttribute('hidden', '');
-    return;
+const heroCarousel = document.querySelector('[data-hero-carousel]');
+if (heroCarousel) {
+  const slides = Array.from(heroCarousel.querySelectorAll('.hero-slide'));
+  if (slides.length > 0) {
+    let index = 0;
+
+    const setActive = (nextIndex) => {
+      slides[index]?.classList.remove('is-active');
+      index = nextIndex;
+      slides[index]?.classList.add('is-active');
+    };
+
+    slides[0].classList.add('is-active');
+
+    setInterval(() => {
+      const next = (index + 1) % slides.length;
+      setActive(next);
+    }, 6000);
   }
-
-  let index = 0;
-
-  const update = () => {
-    track.style.transform = `translateX(-${index * 100}%)`;
-    if (prev) {
-      prev.toggleAttribute('disabled', index === 0);
-    }
-    if (next) {
-      next.toggleAttribute('disabled', index >= slides.length - 1);
-    }
-  };
-
-  prev?.addEventListener('click', () => {
-    if (index > 0) {
-      index -= 1;
-      update();
-    }
-  });
-
-  next?.addEventListener('click', () => {
-    if (index < slides.length - 1) {
-      index += 1;
-      update();
-    }
-  });
-
-  if (slides.length === 1) {
-    prev?.setAttribute('hidden', '');
-    next?.setAttribute('hidden', '');
-  }
-
-  update();
-});
-
-const carousels = document.querySelectorAll('[data-carousel]');
-carousels.forEach((carousel) => {
-  const track = carousel.querySelector('[data-carousel-track]');
-  const prev = carousel.querySelector('[data-carousel-prev]');
-  const next = carousel.querySelector('[data-carousel-next]');
-  if (!track) return;
-
-  const items = Array.from(track.children);
-  if (items.length <= 1) {
-    prev?.setAttribute('hidden', '');
-    next?.setAttribute('hidden', '');
-    return;
-  }
-
-  const scrollAmount = () => track.clientWidth * 0.9;
-
-  const updateNav = () => {
-    const maxScroll = track.scrollWidth - track.clientWidth - 1;
-    if (prev) {
-      prev.toggleAttribute('disabled', track.scrollLeft <= 1);
-    }
-    if (next) {
-      next.toggleAttribute('disabled', track.scrollLeft >= maxScroll);
-    }
-  };
-
-  prev?.addEventListener('click', () => {
-    track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
-  });
-
-  next?.addEventListener('click', () => {
-    track.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
-  });
-
-  track.addEventListener('scroll', () => {
-    window.requestAnimationFrame(updateNav);
-  });
-
-  window.addEventListener('resize', updateNav);
-  updateNav();
-});
+}
