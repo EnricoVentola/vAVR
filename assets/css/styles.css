@@ -939,6 +939,7 @@ blockquote {
   position: relative;
   height: clamp(200px, 28vw, 260px);
   overflow: hidden;
+  background: rgba(9, 19, 26, 0.1);
 }
 
 .resource-card-media img {
