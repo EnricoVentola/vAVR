@@ -3,6 +3,68 @@ const form = document.querySelector('[data-selector-form]');
 const summary = document.querySelector('[data-summary]');
 const progress = document.querySelectorAll('[data-progress-step]');
 
+function buildWhatsAppLines(formElement) {
+  const intro = formElement.getAttribute('data-whatsapp-intro');
+  const lines = [];
+  if (intro) {
+    lines.push(intro);
+  }
+
+  const fields = Array.from(formElement.querySelectorAll('input, select, textarea'));
+  fields.forEach((field) => {
+    if (!field.name) return;
+    if ((field.type === 'checkbox' || field.type === 'radio') && !field.checked) return;
+
+    const value = typeof field.value === 'string' ? field.value.trim() : '';
+    if (!value) return;
+
+    let labelText = '';
+    if (field.id) {
+      const escapedId = typeof CSS !== 'undefined' && CSS.escape ? CSS.escape(field.id) : field.id;
+      const label = formElement.querySelector(`label[for="${escapedId}"]`);
+      if (label) {
+        labelText = label.textContent.trim();
+      }
+    }
+
+    if (!labelText && field.placeholder) {
+      labelText = field.placeholder;
+    }
+
+    if (!labelText && field.name) {
+      const normalised = field.name
+        .replace(/([A-Z])/g, ' $1')
+        .replace(/[_-]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+      if (normalised) {
+        labelText = normalised.charAt(0).toUpperCase() + normalised.slice(1);
+      }
+    }
+
+    if (!labelText) {
+      labelText = 'Detail';
+    }
+
+    lines.push(`${labelText}: ${value}`);
+  });
+
+  if (lines.length === 0) {
+    lines.push('Hello VAVR team, I would like to discuss display solutions.');
+  }
+
+  return lines;
+}
+
+function launchWhatsAppChat(formElement) {
+  const number = formElement.getAttribute('data-whatsapp-number');
+  if (!number) return;
+
+  const message = buildWhatsAppLines(formElement).join('\n');
+  const url = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank', 'noopener');
+}
+
 const specSheets = {
   'All-in-One': {
     label: 'All-in-One Interactive BizetBeeBoard Touchscreen',
@@ -706,7 +768,13 @@ if (form) {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     buildSummary(new FormData(form));
-    showStep(steps.length - 1);
+
+    if (currentStepIndex < steps.length - 1) {
+      showStep(steps.length - 1);
+      return;
+    }
+
+    launchWhatsAppChat(form);
   });
 
   form.addEventListener('click', (event) => {

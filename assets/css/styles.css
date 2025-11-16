@@ -221,6 +221,7 @@ main {
   height: 1.2rem;
   flex-shrink: 0;
   fill: currentColor;
+  display: block;
 }
 
 .btn-primary {
