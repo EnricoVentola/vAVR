@@ -255,7 +255,7 @@ if (sizeTool) {
   }
 }
 
-const whatsappForms = document.querySelectorAll('form[data-whatsapp-number]');
+const whatsappForms = document.querySelectorAll('form[data-whatsapp-number]:not([data-whatsapp-skip])');
 whatsappForms.forEach((form) => {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -314,6 +314,41 @@ whatsappForms.forEach((form) => {
     const url = `https://wa.me/${number}?text=${encodeURIComponent(lines.join('\n'))}`;
     window.open(url, '_blank', 'noopener');
   });
+});
+
+const specLinkGroups = document.querySelectorAll('.spec-links');
+specLinkGroups.forEach((group) => {
+  if (group.querySelector('.spec-dropdown')) {
+    return;
+  }
+
+  const links = Array.from(group.querySelectorAll('.spec-link'));
+  if (links.length < 5) {
+    return;
+  }
+
+  const dropdown = document.createElement('details');
+  dropdown.className = 'spec-dropdown';
+
+  const summary = document.createElement('summary');
+  summary.className = 'spec-dropdown-toggle';
+  const product = group.closest('li, .spec-item');
+  const productLabelElement = product ? product.querySelector('.spec-product') : null;
+  const productLabel = productLabelElement ? productLabelElement.textContent.trim() : '';
+  summary.textContent = productLabel ? `Browse ${productLabel} downloads` : 'Browse downloads';
+
+  const menu = document.createElement('div');
+  menu.className = 'spec-dropdown-menu';
+
+  links.forEach((link) => {
+    link.classList.remove('btn', 'btn-outline', 'btn-pill', 'spec-link');
+    link.classList.add('spec-dropdown-item');
+    menu.appendChild(link);
+  });
+
+  dropdown.append(summary, menu);
+  group.innerHTML = '';
+  group.appendChild(dropdown);
 });
 
 
