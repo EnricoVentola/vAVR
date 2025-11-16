@@ -216,10 +216,23 @@ main {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.btn svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
 .btn-primary {
   background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
   color: white;
   box-shadow: 0 8px 20px rgba(10, 126, 81, 0.2);
+}
+
+.btn-whatsapp {
+  background: #25d366;
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
 }
 
 .btn-secondary {
@@ -244,6 +257,11 @@ main {
 .btn:focus {
   transform: translateY(-2px);
   box-shadow: 0 12px 24px rgba(10, 126, 81, 0.25);
+}
+
+.btn-whatsapp:hover,
+.btn-whatsapp:focus {
+  box-shadow: 0 12px 24px rgba(37, 211, 102, 0.45);
 }
 
 .btn-outline:hover,
