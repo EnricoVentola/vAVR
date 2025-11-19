@@ -179,11 +179,11 @@ main {
 }
 
 .hero {
-  display: grid;
-  gap: 2.5rem;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  align-items: flex-start;
   padding: 4rem 0;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
 .hero-content h1 {
@@ -349,124 +349,28 @@ section {
 }
 
 
-.hero-media {
+.hero-video {
   position: relative;
-  border-radius: 1.25rem;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  border-radius: 0;
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(9, 19, 26, 0.25);
-  min-height: 320px;
   background: rgba(9, 19, 26, 0.85);
 }
 
-.hero-carousel {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: inherit;
-  overflow: hidden;
-}
-
-.hero-carousel-track {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: inherit;
-}
-
-.hero-slide {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.6s ease;
-  pointer-events: none;
-}
-
-.hero-slide[data-active='true'] {
-  opacity: 1;
-  pointer-events: auto;
-  z-index: 1;
-}
-
-.hero-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.hero-video-media {
   display: block;
-}
-
-.hero-carousel-control {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  border: none;
-  background: rgba(9, 19, 26, 0.5);
-  color: #ffffff;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  transition: background 0.2s ease;
-  z-index: 2;
-}
-
-.hero-carousel-control:hover,
-.hero-carousel-control:focus-visible {
-  background: rgba(20, 199, 136, 0.85);
-}
-
-.hero-carousel-control[data-hero-prev] {
-  left: 1rem;
-}
-
-.hero-carousel-control[data-hero-next] {
-  right: 1rem;
-}
-
-.hero-carousel-dots {
-  position: absolute;
-  left: 50%;
-  bottom: 3.5rem;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 0.5rem;
-  z-index: 2;
-}
-
-.hero-carousel-dot {
-  width: 0.6rem;
-  height: 0.6rem;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.65);
-  background: transparent;
-  padding: 0;
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.hero-carousel-dot[aria-selected='true'] {
-  background: rgba(20, 199, 136, 0.85);
-  border-color: rgba(20, 199, 136, 0.85);
-  transform: scale(1.1);
-}
-
-.hero-carousel-dot:focus-visible {
-  outline: 2px solid rgba(20, 199, 136, 0.9);
-  outline-offset: 2px;
-}
-
-.hero-media figcaption {
-  position: absolute;
-  left: 0;
-  bottom: 0;
   width: 100%;
-  padding: 1rem 1.25rem 2.75rem;
-  background: linear-gradient(180deg, transparent, rgba(9, 19, 26, 0.75));
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 0.85rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  height: clamp(240px, 56vw, 640px);
+  object-fit: cover;
+  background: black;
+}
+
+.hero-caption {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(13, 31, 45, 0.7);
 }
 
 .card-image {
