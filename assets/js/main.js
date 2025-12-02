@@ -255,64 +255,72 @@ if (sizeTool) {
   }
 }
 
-const whatsappForms = document.querySelectorAll('form[data-whatsapp-number]:not([data-whatsapp-skip])');
-whatsappForms.forEach((form) => {
+const buildEmailLines = (form) => {
+  const intro = form.getAttribute('data-email-subject');
+  const lines = [];
+  if (intro) {
+    lines.push(intro);
+  }
+
+  const fields = Array.from(form.querySelectorAll('input, select, textarea'));
+  fields.forEach((field) => {
+    if (!field.name) return;
+    if ((field.type === 'checkbox' || field.type === 'radio') && !field.checked) return;
+
+    const value = typeof field.value === 'string' ? field.value.trim() : '';
+    if (!value) return;
+
+    let labelText = '';
+    if (field.id) {
+      const escapedId = typeof CSS !== 'undefined' && CSS.escape ? CSS.escape(field.id) : field.id;
+      const label = form.querySelector(`label[for="${escapedId}"]`);
+      if (label) {
+        labelText = label.textContent.trim();
+      }
+    }
+
+    if (!labelText && field.placeholder) {
+      labelText = field.placeholder;
+    }
+
+    if (!labelText && field.name) {
+      const normalised = field.name
+        .replace(/([A-Z])/g, ' $1')
+        .replace(/[_-]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+      if (normalised) {
+        labelText = normalised.charAt(0).toUpperCase() + normalised.slice(1);
+      }
+    }
+
+    if (!labelText) {
+      labelText = 'Detail';
+    }
+
+    lines.push(`${labelText}: ${value}`);
+  });
+
+  if (lines.length === 0) {
+    lines.push('Hello VAVR team, I would like to discuss display solutions.');
+  }
+
+  return lines;
+};
+
+const emailForms = document.querySelectorAll('form[data-email-target]:not([data-email-skip])');
+emailForms.forEach((form) => {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    const number = form.getAttribute('data-whatsapp-number');
-    if (!number) return;
+    if (!form.reportValidity()) return;
 
-    const intro = form.getAttribute('data-whatsapp-intro');
-    const lines = [];
-    if (intro) {
-      lines.push(intro);
-    }
+    const target = form.getAttribute('data-email-target');
+    if (!target) return;
 
-    const fields = Array.from(form.querySelectorAll('input, select, textarea'));
-    fields.forEach((field) => {
-      if (!field.name) return;
-      if ((field.type === 'checkbox' || field.type === 'radio') && !field.checked) return;
-
-      const value = typeof field.value === 'string' ? field.value.trim() : '';
-      if (!value) return;
-
-      let labelText = '';
-      if (field.id) {
-        const escapedId = typeof CSS !== 'undefined' && CSS.escape ? CSS.escape(field.id) : field.id;
-        const label = form.querySelector(`label[for="${escapedId}"]`);
-        if (label) {
-          labelText = label.textContent.trim();
-        }
-      }
-
-      if (!labelText && field.placeholder) {
-        labelText = field.placeholder;
-      }
-
-      if (!labelText && field.name) {
-        const normalised = field.name
-          .replace(/([A-Z])/g, ' $1')
-          .replace(/[_-]/g, ' ')
-          .replace(/\s+/g, ' ')
-          .trim();
-        if (normalised) {
-          labelText = normalised.charAt(0).toUpperCase() + normalised.slice(1);
-        }
-      }
-
-      if (!labelText) {
-        labelText = 'Detail';
-      }
-
-      lines.push(`${labelText}: ${value}`);
-    });
-
-    if (lines.length === 0) {
-      lines.push('Hello VAVR team, I would like to discuss display solutions.');
-    }
-
-    const url = `https://wa.me/${number}?text=${encodeURIComponent(lines.join('\n'))}`;
-    window.open(url, '_blank', 'noopener');
+    const subject = form.getAttribute('data-email-subject') || 'VAvR enquiry';
+    const body = buildEmailLines(form).join('\n');
+    const mailto = `mailto:${encodeURIComponent(target)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
   });
 });
 
