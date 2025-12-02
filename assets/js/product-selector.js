@@ -3,8 +3,8 @@ const form = document.querySelector('[data-selector-form]');
 const summary = document.querySelector('[data-summary]');
 const progress = document.querySelectorAll('[data-progress-step]');
 
-function buildWhatsAppLines(formElement) {
-  const intro = formElement.getAttribute('data-whatsapp-intro');
+function buildEmailLines(formElement) {
+  const intro = formElement.getAttribute('data-email-subject');
   const lines = [];
   if (intro) {
     lines.push(intro);
@@ -56,13 +56,16 @@ function buildWhatsAppLines(formElement) {
   return lines;
 }
 
-function launchWhatsAppChat(formElement) {
-  const number = formElement.getAttribute('data-whatsapp-number');
-  if (!number) return;
+function launchEmailDraft(formElement) {
+  const target = formElement.getAttribute('data-email-target');
+  if (!target) return;
 
-  const message = buildWhatsAppLines(formElement).join('\n');
-  const url = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
-  window.open(url, '_blank', 'noopener');
+  const subject = formElement.getAttribute('data-email-subject') || 'Product selector request';
+  const message = buildEmailLines(formElement).join('\n');
+  const mailto = `mailto:${encodeURIComponent(target)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+    message,
+  )}`;
+  window.location.href = mailto;
 }
 
 const specSheets = {
@@ -726,6 +729,16 @@ function showStep(index) {
 }
 
 function goToNextStep() {
+  const step = steps[currentStepIndex];
+  if (!step) return;
+
+  const fields = Array.from(step.querySelectorAll('input, select, textarea'));
+  const invalidField = fields.find((field) => !field.checkValidity());
+  if (invalidField) {
+    invalidField.reportValidity();
+    return;
+  }
+
   if (currentStepIndex < steps.length - 1) {
     showStep(currentStepIndex + 1);
   }
@@ -767,6 +780,7 @@ if (form) {
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
+    if (!form.reportValidity()) return;
     buildSummary(new FormData(form));
 
     if (currentStepIndex < steps.length - 1) {
@@ -774,7 +788,7 @@ if (form) {
       return;
     }
 
-    launchWhatsAppChat(form);
+    launchEmailDraft(form);
   });
 
   form.addEventListener('click', (event) => {
