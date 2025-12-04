@@ -1,9 +1,10 @@
+;(function () {
 const steps = Array.from(document.querySelectorAll('[data-step]'));
 const form = document.querySelector('[data-selector-form]');
 const summary = document.querySelector('[data-summary]');
 const progress = document.querySelectorAll('[data-progress-step]');
 
-function buildEmailLines(formElement) {
+function buildSelectorEmailLines(formElement) {
   const intro = formElement.getAttribute('data-email-subject');
   const lines = [];
   if (intro) {
@@ -61,7 +62,7 @@ function launchEmailDraft(formElement) {
   if (!target) return;
 
   const subject = formElement.getAttribute('data-email-subject') || 'Product selector request';
-  const message = buildEmailLines(formElement).join('\n');
+  const message = buildSelectorEmailLines(formElement).join('\n');
   const mailto = `mailto:${encodeURIComponent(target)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
     message,
   )}`;
@@ -677,6 +678,8 @@ function updateProgress(index) {
 }
 
 function buildSummary(formData) {
+  if (!summary) return;
+
   const entries = Array.from(formData.entries())
     .filter(([, value]) => value)
     .map(([key, value]) => ({
@@ -778,6 +781,22 @@ if (form) {
     buildSummary(new FormData(form));
   });
 
+  const nextButtons = form.querySelectorAll('[data-next]');
+  nextButtons.forEach((button) => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      goToNextStep();
+    });
+  });
+
+  const prevButtons = form.querySelectorAll('[data-prev]');
+  prevButtons.forEach((button) => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      goToPreviousStep();
+    });
+  });
+
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     if (!form.reportValidity()) return;
@@ -791,18 +810,9 @@ if (form) {
     launchEmailDraft(form);
   });
 
-  form.addEventListener('click', (event) => {
-    if (event.target.closest('[data-next]')) {
-      event.preventDefault();
-      goToNextStep();
-    }
-    if (event.target.closest('[data-prev]')) {
-      event.preventDefault();
-      goToPreviousStep();
-    }
-  });
-
   buildSummary(new FormData(form));
 } else {
   buildSummary(new FormData());
 }
+
+})();
