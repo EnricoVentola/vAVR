@@ -1,43 +1,44 @@
-const navLinks = document.querySelectorAll('nav a');
-navLinks.forEach((link) => {
-  if (link.href === window.location.href) {
-    link.setAttribute('aria-current', 'page');
+;(function () {
+  const navLinks = document.querySelectorAll('nav a');
+  navLinks.forEach((link) => {
+    if (link.href === window.location.href) {
+      link.setAttribute('aria-current', 'page');
+    }
+  });
+
+  const navToggle = document.querySelector('.nav-toggle');
+  const primaryNav = document.querySelector('#primary-nav');
+
+  if (navToggle && primaryNav) {
+    const closeNav = () => {
+      navToggle.setAttribute('aria-expanded', 'false');
+      primaryNav.classList.remove('is-open');
+    };
+
+    navToggle.addEventListener('click', () => {
+      const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+      navToggle.setAttribute('aria-expanded', String(!expanded));
+      primaryNav.classList.toggle('is-open', !expanded);
+    });
+
+    primaryNav.addEventListener('click', (event) => {
+      if (event.target.closest('a')) {
+        closeNav();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        closeNav();
+      }
+    });
   }
-});
 
-const navToggle = document.querySelector('.nav-toggle');
-const primaryNav = document.querySelector('#primary-nav');
-
-if (navToggle && primaryNav) {
-  const closeNav = () => {
-    navToggle.setAttribute('aria-expanded', 'false');
-    primaryNav.classList.remove('is-open');
-  };
-
-  navToggle.addEventListener('click', () => {
-    const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-    navToggle.setAttribute('aria-expanded', String(!expanded));
-    primaryNav.classList.toggle('is-open', !expanded);
-  });
-
-  primaryNav.addEventListener('click', (event) => {
-    if (event.target.closest('a')) {
-      closeNav();
-    }
-  });
-
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) {
-      closeNav();
-    }
-  });
-}
-
-const heroCarousels = document.querySelectorAll('[data-hero-carousel]');
-heroCarousels.forEach((carousel) => {
-  const track = carousel.querySelector('[data-hero-track]');
-  const slides = track ? Array.from(track.children) : [];
-  if (!track || slides.length <= 1) return;
+  const heroCarousels = document.querySelectorAll('[data-hero-carousel]');
+  heroCarousels.forEach((carousel) => {
+    const track = carousel.querySelector('[data-hero-track]');
+    const slides = track ? Array.from(track.children) : [];
+    if (!track || slides.length <= 1) return;
 
   const prev = carousel.querySelector('[data-hero-prev]');
   const next = carousel.querySelector('[data-hero-next]');
@@ -384,3 +385,4 @@ if (heroCarousel) {
     }, 6000);
   }
 }
+})();
