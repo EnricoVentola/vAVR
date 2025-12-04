@@ -1,3 +1,4 @@
+;(function () {
 const steps = Array.from(document.querySelectorAll('[data-step]'));
 const form = document.querySelector('[data-selector-form]');
 const summary = document.querySelector('[data-summary]');
@@ -813,3 +814,5 @@ if (form) {
 } else {
   buildSummary(new FormData());
 }
+
+})();
