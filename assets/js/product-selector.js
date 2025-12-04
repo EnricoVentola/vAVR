@@ -4,7 +4,7 @@ const form = document.querySelector('[data-selector-form]');
 const summary = document.querySelector('[data-summary]');
 const progress = document.querySelectorAll('[data-progress-step]');
 
-function buildEmailLines(formElement) {
+function buildSelectorEmailLines(formElement) {
   const intro = formElement.getAttribute('data-email-subject');
   const lines = [];
   if (intro) {
@@ -62,7 +62,7 @@ function launchEmailDraft(formElement) {
   if (!target) return;
 
   const subject = formElement.getAttribute('data-email-subject') || 'Product selector request';
-  const message = buildEmailLines(formElement).join('\n');
+  const message = buildSelectorEmailLines(formElement).join('\n');
   const mailto = `mailto:${encodeURIComponent(target)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
     message,
   )}`;
